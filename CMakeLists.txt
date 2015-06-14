@@ -28,5 +28,7 @@ add_executable(ProgrammableBot
         sketch_ProgrammableBot/ProgramNode.cpp
         sketch_ProgrammableBot/ProgramNode.h
         sketch_ProgrammableBot/ProgramSequence.cpp
-        sketch_ProgrammableBot/ProgramSequence.h)
+        sketch_ProgrammableBot/ProgramSequence.h
+        sketch_ProgrammableBot/Bot.cpp
+        sketch_ProgrammableBot/Bot.h)
 

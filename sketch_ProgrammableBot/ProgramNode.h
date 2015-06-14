@@ -10,6 +10,15 @@
 
 class ProgramNode {
 
+private:
+    static const  uint8_t ID_NOT_INITIALIZED = 255;
+    uint8_t m_id;
+
+public:
+    ProgramNode();
+
+    void initNode(uint8_t id);
+
 };
 
 

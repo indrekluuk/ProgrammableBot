@@ -15,8 +15,11 @@ private:
     uint8_t m_nodeCount;
 
 public:
-    ProgramSequence(ProgramNode * nodes, uint8_t nodeCount);
+    ProgramSequence(ProgramNode * nodes, uint8_t nodeCount, uint8_t firstNodeId);
 
+
+private:
+    void initNodes(uint8_t firstNodeId);
 };
 
 

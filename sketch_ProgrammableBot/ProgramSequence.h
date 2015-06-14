@@ -24,6 +24,7 @@ public:
     ProgramSequence(Bot & bot, uint8_t firstNodeId, uint8_t nodeCount);
 
     void start(Callback* done);
+    void stop();
 
 private:
 

@@ -6,3 +6,6 @@
 
 Scheduler NodeAction::m_nodeScheduler;
 
+void NodeAction::stop() {
+    m_nodeScheduler.stop();
+}

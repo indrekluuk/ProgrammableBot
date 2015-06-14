@@ -27,12 +27,15 @@ Bot::Bot(NodeReader & nodeReader) :
 
 
 
-void Bot::startExecution(Callback *allDone) {
+void Bot::start(Callback *allDone) {
     m_main.start(allDone);
 }
 
-void Bot::cancelExecution() {
-
+void Bot::stop() {
+    m_main.stop();
+    m_sub1.stop();
+    m_sub2.stop();
+    NodeAction::stop();
 }
 
 

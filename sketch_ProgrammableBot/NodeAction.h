@@ -31,6 +31,8 @@ protected:
 public:
     virtual void execute(Callback& callback) = 0;
 
+    static void stop();
+
 };
 
 

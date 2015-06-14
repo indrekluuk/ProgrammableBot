@@ -47,7 +47,7 @@ public:
 
 TEST_F(SequenceExecutionTest, testAllIdleNoCallback) {
     Bot bot(m_nodeReader);
-    bot.startExecution(nullptr);
+    bot.start(nullptr);
 };
 
 
@@ -55,7 +55,7 @@ TEST_F(SequenceExecutionTest, testAllIdleNoCallback) {
 TEST_F(SequenceExecutionTest, testAllIdleDone) {
     ASSERT_FALSE(m_isAllDone);
     Bot bot(m_nodeReader);
-    bot.startExecution(&m_doneCallback);
+    bot.start(&m_doneCallback);
     ASSERT_TRUE(m_isAllDone);
 };
 
@@ -69,7 +69,7 @@ TEST_F(SequenceExecutionTest, testWaitAction) {
 
     ASSERT_FALSE(m_isAllDone);
     Bot bot(m_nodeReader);
-    bot.startExecution(&m_doneCallback);
+    bot.start(&m_doneCallback);
     ASSERT_FALSE(m_isAllDone);
     runBot(5010, bot);
     ASSERT_FALSE(m_isAllDone);
@@ -95,7 +95,7 @@ TEST_F(SequenceExecutionTest, testCallOnlySecondSub) {
 
     ASSERT_FALSE(m_isAllDone);
     Bot bot(m_nodeReader);
-    bot.startExecution(&m_doneCallback);
+    bot.start(&m_doneCallback);
     ASSERT_FALSE(m_isAllDone);
     runBot(1990, bot);
     ASSERT_FALSE(m_isAllDone);
@@ -119,7 +119,7 @@ TEST_F(SequenceExecutionTest, testCallBothSubs) {
 
     ASSERT_FALSE(m_isAllDone);
     Bot bot(m_nodeReader);
-    bot.startExecution(&m_doneCallback);
+    bot.start(&m_doneCallback);
     ASSERT_FALSE(m_isAllDone);
     runBot(16990, bot);
     ASSERT_FALSE(m_isAllDone);
@@ -143,11 +143,11 @@ TEST_F(SequenceExecutionTest, testCancelExecution) {
 
     ASSERT_FALSE(m_isAllDone);
     Bot bot(m_nodeReader);
-    bot.startExecution(&m_doneCallback);
+    bot.start(&m_doneCallback);
     ASSERT_FALSE(m_isAllDone);
     runBot(10000, bot);
     ASSERT_FALSE(m_isAllDone);
-    bot.cancelExecution();
+    bot.stop();
     runBot(10000, bot);
     ASSERT_FALSE(m_isAllDone);
 };

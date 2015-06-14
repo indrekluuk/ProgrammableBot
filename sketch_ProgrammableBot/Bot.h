@@ -39,8 +39,8 @@ public:
     Bot(NodeReader & nodeReader);
 
 
-    void startExecution(Callback * allDone);
-    void cancelExecution();
+    void start(Callback * allDone);
+    void stop();
 
     void executeNode(uint8_t nodeId, Callback & done);
     void run();

@@ -19,6 +19,10 @@ void ProgramSequence::start(Callback * done) {
     m_executionSequencer.start(done);
 }
 
+void ProgramSequence::stop() {
+    m_executionSequencer.stop();
+}
+
 void ProgramSequence::executeNode(Sequencer &sequencer, uint8_t step) {
     uint8_t nodeIndex = step - (uint8_t)1;
     if (nodeIndex < m_nodeCount) {
@@ -29,3 +33,4 @@ void ProgramSequence::executeNode(Sequencer &sequencer, uint8_t step) {
 uint8_t ProgramSequence::getNodeId(uint8_t nodeIndex) {
     return m_firstNodeId+nodeIndex;
 }
+

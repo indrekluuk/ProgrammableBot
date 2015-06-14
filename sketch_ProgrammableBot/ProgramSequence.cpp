@@ -27,7 +27,7 @@ void ProgramSequence::initNodes(uint8_t firstNodeId) {
     }
 }
 
-void ProgramSequence::start(Callback *done) {
+void ProgramSequence::start(Callback * done) {
     m_currentNodeIndex = 0;
     m_executionSequencer.start(done);
 }

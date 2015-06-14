@@ -19,7 +19,8 @@ set(LIBRARY_SOURCE_FILES
 
 set(TEST_SOURCE_FILES
         tests/main.cpp
-        tests/Arduino.cpp)
+        tests/Arduino.cpp
+        tests/SequenceExecutionTest.cpp)
 
 
 add_executable(ProgrammableBot

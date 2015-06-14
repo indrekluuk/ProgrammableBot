@@ -5,7 +5,7 @@
 #include "Bot.h"
 
 
-Bot::Bot() :
+Bot::Bot(Callback * allDone) :
         m_main(*this, m_mainNodes, MAIN_NODE_COUNT, MAIN_FIRST_NODE_ID),
         m_sub1(*this, m_sub1Nodes, SUB_1_NODE_COUNT, SUB_1_FIRST_NODE_ID),
         m_sub2(*this, m_sub2Nodes, SUB_2_NODE_COUNT, SUB_2_FIRST_NODE_ID),
@@ -17,7 +17,7 @@ Bot::Bot() :
     m_nodeExecutor.initAction(NodeAction::NODE_ACTION_OUTPUT_PIN_ON, m_actionOutputPinOn);
     m_nodeExecutor.initAction(NodeAction::NODE_ACTION_OUTPUT_PIN_OFF, m_actionOutputPinOff);
 
-    m_main.start(nullptr);
+    m_main.start(allDone);
 }
 
 

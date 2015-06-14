@@ -33,7 +33,8 @@ private:
 
 
 public:
-    Bot();
+
+    Bot(Callback * allDone);
 
     void executeNode(ProgramNode & node, Callback & done);
 

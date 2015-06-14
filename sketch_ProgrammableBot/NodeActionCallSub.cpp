@@ -6,5 +6,5 @@
 
 
 void NodeActionCallSub::execute(Callback &callback) {
-
+    callback.call();
 }

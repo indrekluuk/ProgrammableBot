@@ -5,5 +5,5 @@
 #include "NodeActionIdle.h"
 
 void NodeActionIdle::execute(Callback &callback) {
-
+    callback.call();
 }

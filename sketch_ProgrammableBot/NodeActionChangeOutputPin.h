@@ -17,7 +17,7 @@ class NodeActionOutputPinOn : public NodeActionChangeOutputPin {
 
 public:
 
-    virtual void execute(Callback &callback);
+    void execute(Callback &callback);
 };
 
 
@@ -25,7 +25,7 @@ class NodeActionOutputPinOff : public NodeActionChangeOutputPin {
 
 public:
 
-    virtual void execute(Callback &callback);
+    void execute(Callback &callback);
 };
 
 

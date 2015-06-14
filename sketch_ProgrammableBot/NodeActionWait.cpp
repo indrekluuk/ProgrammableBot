@@ -6,5 +6,5 @@
 
 
 void NodeActionWait::execute(Callback &callback) {
-
+    callback.call();
 }

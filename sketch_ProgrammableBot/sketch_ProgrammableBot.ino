@@ -2,7 +2,7 @@
 #include "Bot.h"
 
 
-Bot bot;
+Bot bot(nullptr);
 
 void setup() {
 }

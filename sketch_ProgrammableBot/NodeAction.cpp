@@ -3,3 +3,6 @@
 //
 
 #include "NodeAction.h"
+
+Scheduler NodeAction::m_nodeScheduler;
+

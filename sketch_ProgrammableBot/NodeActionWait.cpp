@@ -12,6 +12,6 @@ NodeActionWait::NodeActionWait(uint32_t milliseconds) :
 
 
 void NodeActionWait::execute(Callback &callback) {
-    scheduler.set(&callback).runOnce(m_milliseconds);
+    m_nodeScheduler.set(&callback).runOnce(m_milliseconds);
 }
 

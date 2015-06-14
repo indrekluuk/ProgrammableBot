@@ -6,14 +6,12 @@
 #define PROGRAMMABLEBOT_NODEACTIONWAIT_H
 
 #include "NodeAction.h"
-#include "Scheduler.h"
 
 
 class NodeActionWait : public NodeAction {
 
 private:
     uint32_t m_milliseconds;
-    Scheduler scheduler;
 
 
 public:

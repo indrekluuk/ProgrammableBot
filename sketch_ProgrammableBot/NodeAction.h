@@ -7,6 +7,7 @@
 
 #include "global.h"
 #include "Callback.h"
+#include "Scheduler.h"
 
 class NodeAction {
 
@@ -23,7 +24,9 @@ public:
         ACTION_COUNT
     };
 
-private:
+protected:
+
+    static Scheduler m_nodeScheduler;
 
 public:
     virtual void execute(Callback& callback) = 0;

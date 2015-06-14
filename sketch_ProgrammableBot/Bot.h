@@ -7,7 +7,10 @@
 
 #include "Constants.h"
 #include "ProgramSequence.h"
-
+#include "NodeActionIdle.h"
+#include "NodeActionCallSub.h"
+#include "NodeActionWait.h"
+#include "NodeActionChangeOutputPin.h"
 
 class Bot {
 
@@ -20,6 +23,12 @@ private:
     ProgramSequence m_sub1;
     ProgramSequence m_sub2;
 
+
+    NodeActionIdle m_actionIdle;
+    NodeActionCallSub m_actionCallSub;
+    NodeActionWait m_actionWait;
+    NodeActionOutputPinOn m_actionOutputPinOn;
+    NodeActionOutputPinOff m_actionOutputPinOff;
     NodeExecutor m_nodeExecutor;
 
 

@@ -6,9 +6,17 @@
 
 
 
-ProgramSequence::ProgramSequence(ProgramNode * nodes, uint8_t nodeCount, uint8_t firstNodeId) :
+ProgramSequence::ProgramSequence(
+        NodeExecutor& nodeExecutor,
+        ProgramNode * nodes,
+        uint8_t nodeCount,
+        uint8_t firstNodeId
+) :
+        m_nodeExecutor(nodeExecutor),
         m_programNodes(nodes),
-        m_nodeCount(nodeCount)
+        m_nodeCount(nodeCount),
+        m_currentNodeIndex(0),
+        m_executionSequencer(this, &ProgramSequence::executeNode)
 {
     initNodes(firstNodeId);
 }
@@ -16,5 +24,17 @@ ProgramSequence::ProgramSequence(ProgramNode * nodes, uint8_t nodeCount, uint8_t
 void ProgramSequence::initNodes(uint8_t firstNodeId) {
     for (uint8_t i=0; i<m_nodeCount; i++) {
         m_programNodes[i].initNode(firstNodeId+i);
+    }
+}
+
+void ProgramSequence::start(Callback *done) {
+    m_currentNodeIndex = 0;
+    m_executionSequencer.start(done);
+}
+
+void ProgramSequence::executeNode(Sequencer &sequencer, uint8_t step) {
+    uint8_t nodeIndex = step - (uint8_t)1;
+    if (nodeIndex < m_nodeCount) {
+        m_nodeExecutor.executeNode(m_programNodes[nodeIndex], sequencer.nextWhenDone());
     }
 }

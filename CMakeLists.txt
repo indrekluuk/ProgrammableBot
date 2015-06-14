@@ -5,6 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}") #  -std=c++11
 
 
 include_directories("./frameworks")
+include_directories("./library/Scheduler")
 include_directories("./sketch_ProgrammableBot")
 include_directories("./tests")
 
@@ -30,5 +31,7 @@ add_executable(ProgrammableBot
         sketch_ProgrammableBot/ProgramSequence.cpp
         sketch_ProgrammableBot/ProgramSequence.h
         sketch_ProgrammableBot/Bot.cpp
-        sketch_ProgrammableBot/Bot.h)
+        sketch_ProgrammableBot/Bot.h
+        sketch_ProgrammableBot/NodeExecutor.cpp
+        sketch_ProgrammableBot/NodeExecutor.h)
 

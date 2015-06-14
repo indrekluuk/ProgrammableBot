@@ -20,6 +20,8 @@ private:
     ProgramSequence m_sub1;
     ProgramSequence m_sub2;
 
+    NodeExecutor m_nodeExecutor;
+
 
 public:
     Bot();

@@ -20,7 +20,8 @@ set(LIBRARY_SOURCE_FILES
 set(TEST_SOURCE_FILES
         tests/main.cpp
         tests/Arduino.cpp
-        tests/SequenceExecutionTest.cpp)
+        tests/SequenceExecutionTest.cpp
+        tests/mock/MockNodeReader.h)
 
 
 add_executable(ProgrammableBot
@@ -42,5 +43,7 @@ add_executable(ProgrammableBot
         sketch_ProgrammableBot/NodeActionWait.cpp
         sketch_ProgrammableBot/NodeActionWait.h
         sketch_ProgrammableBot/NodeActionIdle.cpp
-        sketch_ProgrammableBot/NodeActionIdle.h)
+        sketch_ProgrammableBot/NodeActionIdle.h
+        sketch_ProgrammableBot/NodeReader.cpp
+        sketch_ProgrammableBot/NodeReader.h)
 

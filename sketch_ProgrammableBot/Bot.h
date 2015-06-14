@@ -6,6 +6,7 @@
 #define PROGRAMMABLEBOT_BOT_H
 
 #include "Constants.h"
+#include "NodeReader.h"
 #include "ProgramSequence.h"
 #include "NodeActionIdle.h"
 #include "NodeActionCallSub.h"
@@ -15,6 +16,8 @@
 class Bot {
 
 private:
+
+    NodeReader & m_nodeReader;
 
     ProgramSequence m_main;
     ProgramSequence m_sub1;
@@ -31,7 +34,7 @@ private:
 
 public:
 
-    Bot(Callback * allDone);
+    Bot(NodeReader & nodeReader, Callback * allDone);
 
     void executeNode(uint8_t nodeId, Callback & done);
 

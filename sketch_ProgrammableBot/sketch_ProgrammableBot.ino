@@ -1,8 +1,9 @@
 #include <Scheduler.h>
+#include "NodeReader.h"
 #include "Bot.h"
 
-
-Bot bot(nullptr);
+HardwareNodeReader nodeReader;
+Bot bot(nodeReader, nullptr);
 
 void setup() {
 }

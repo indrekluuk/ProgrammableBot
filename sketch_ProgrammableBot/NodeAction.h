@@ -15,7 +15,8 @@ public:
     enum NodeActionType {
         NODE_ACTION_IDLE = 0,
         NODE_ACTION_CALL_SUB,
-        NODE_ACTION_WAIT,
+        NODE_ACTION_WAIT_1sec,
+        NODE_ACTION_WAIT_5sec,
         NODE_ACTION_OUTPUT_PIN_ON,
         NODE_ACTION_OUTPUT_PIN_OFF,
         ACTION_COUNT

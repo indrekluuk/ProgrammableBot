@@ -6,13 +6,13 @@
 
 NodeExecutor::NodeExecutor()
 {
-    for (uint8_t i=0; i<NODE_ACTION_COUNT; i++) {
+    for (uint8_t i=0; i<NodeAction::NODE_ACTION_COUNT; i++) {
         m_nodeActions[i] = nullptr;
     }
 }
 
 
-void NodeExecutor::initAction(NodeExecutor::NodeActionType type, NodeAction *action) {
+void NodeExecutor::initAction(NodeAction::NodeActionType type, NodeAction *action) {
     m_nodeActions[type] = action;
 }
 

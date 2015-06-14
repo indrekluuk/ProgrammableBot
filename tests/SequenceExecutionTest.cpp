@@ -56,7 +56,10 @@ TEST_F(SequenceExecutionTest, testWaitAction) {
     ASSERT_FALSE(isAllDone);
     Bot bot(nodeReader, &doneCallback);
     ASSERT_FALSE(isAllDone);
-
+    arduino_increase_millis(5010);
+    ASSERT_FALSE(isAllDone);
+    arduino_increase_millis(1000);
+    ASSERT_TRUE(isAllDone);
 
 };
 

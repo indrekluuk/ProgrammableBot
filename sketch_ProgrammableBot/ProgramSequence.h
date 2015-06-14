@@ -17,7 +17,6 @@ private:
     Bot & m_bot;
     uint8_t m_firstNodeId;
     uint8_t m_nodeCount;
-    uint8_t m_currentNodeIndex;
 
     MethodSequencer<ProgramSequence> m_executionSequencer;
 
@@ -29,7 +28,6 @@ public:
 private:
 
     void executeNode(Sequencer& sequencer, uint8_t step);
-    NodeAction::NodeActionType getNodeActionType(uint8_t nodeIndex);
     uint8_t getNodeId(uint8_t nodeIndex);
 
 };

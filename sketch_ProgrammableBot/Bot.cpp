@@ -22,14 +22,14 @@ Bot::Bot(Callback * allDone) :
 
 
 
-NodeAction::NodeActionType Bot::getNodeAction(uint8_t nodeId) {
+
+void Bot::executeNode(uint8_t nodeId, Callback & done) {
+    m_nodeExecutor.executeNode(getNodeActionType(nodeId), done);
+}
+
+NodeAction::NodeActionType Bot::getNodeActionType(uint8_t nodeId) {
     return NodeAction::NODE_ACTION_IDLE;
 }
-
-void Bot::executeNode(NodeAction::NodeActionType type, Callback & done) {
-    m_nodeExecutor.executeNode(type, done);
-}
-
 
 
 void Bot::run() {

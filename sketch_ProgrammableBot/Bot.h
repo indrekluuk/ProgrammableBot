@@ -33,14 +33,15 @@ public:
 
     Bot(Callback * allDone);
 
-    NodeAction::NodeActionType getNodeAction(uint8_t nodeId);
-    void executeNode(NodeAction::NodeActionType type, Callback & done);
+    void executeNode(uint8_t nodeId, Callback & done);
 
     void run();
 
 
 
 private:
+
+    NodeAction::NodeActionType getNodeActionType(uint8_t nodeId);
 
 };
 

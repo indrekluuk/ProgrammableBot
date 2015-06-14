@@ -36,10 +36,13 @@ private:
 
 public:
 
-    Bot(NodeReader & nodeReader, Callback * allDone);
+    Bot(NodeReader & nodeReader);
+
+
+    void startExecution(Callback * allDone);
+    void cancelExecution();
 
     void executeNode(uint8_t nodeId, Callback & done);
-
     void run();
 
 

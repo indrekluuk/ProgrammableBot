@@ -12,12 +12,18 @@ class SequenceExecutionTest : public ::testing::Test {
 
 protected:
 
-    bool isAllDone;
-    MockNodeReader nodeReader;
+    bool m_isAllDone;
+    MockNodeReader m_nodeReader;
+    MethodCallback<SequenceExecutionTest> m_doneCallback;
+
+
+    SequenceExecutionTest() : m_doneCallback(this, &SequenceExecutionTest::allDone)
+    {
+    }
 
     virtual void SetUp() {
         arduino_reset_device();
-        isAllDone = false;
+        m_isAllDone = false;
     }
 
 
@@ -32,7 +38,7 @@ protected:
 
 public:
     void allDone() {
-        isAllDone = true;
+        m_isAllDone = true;
     }
 
 
@@ -40,84 +46,108 @@ public:
 
 
 TEST_F(SequenceExecutionTest, testAllIdleNoCallback) {
-    Bot bot(nodeReader, nullptr);
+    Bot bot(m_nodeReader);
+    bot.startExecution(nullptr);
 };
 
 
 
 TEST_F(SequenceExecutionTest, testAllIdleDone) {
-    MethodCallback<SequenceExecutionTest> doneCallback(this, &SequenceExecutionTest::allDone);
-
-    ASSERT_FALSE(isAllDone);
-    Bot bot(nodeReader, &doneCallback);
-    ASSERT_TRUE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
+    Bot bot(m_nodeReader);
+    bot.startExecution(&m_doneCallback);
+    ASSERT_TRUE(m_isAllDone);
 };
 
 
 
 TEST_F(SequenceExecutionTest, testWaitAction) {
-    MethodCallback<SequenceExecutionTest> doneCallback(this, &SequenceExecutionTest::allDone);
 
-    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
-    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 5, NodeAction::NODE_ACTION_WAIT_1sec);
-    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 5, NodeAction::NODE_ACTION_WAIT_1sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
 
-    ASSERT_FALSE(isAllDone);
-    Bot bot(nodeReader, &doneCallback);
-    ASSERT_FALSE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
+    Bot bot(m_nodeReader);
+    bot.startExecution(&m_doneCallback);
+    ASSERT_FALSE(m_isAllDone);
     runBot(5010, bot);
-    ASSERT_FALSE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
     runBot(900, bot);
-    ASSERT_FALSE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
     runBot(100, bot);
-    ASSERT_TRUE(isAllDone);
+    ASSERT_TRUE(m_isAllDone);
 
 };
 
 
 
 TEST_F(SequenceExecutionTest, testCallOnlySecondSub) {
-    MethodCallback<SequenceExecutionTest> doneCallback(this, &SequenceExecutionTest::allDone);
 
-    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
-    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_2);
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_2);
 
-    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
-    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_WAIT_5sec);
-    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 2, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 2, NodeAction::NODE_ACTION_WAIT_5sec);
 
-    nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    m_nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
 
-    ASSERT_FALSE(isAllDone);
-    Bot bot(nodeReader, &doneCallback);
-    ASSERT_FALSE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
+    Bot bot(m_nodeReader);
+    bot.startExecution(&m_doneCallback);
+    ASSERT_FALSE(m_isAllDone);
     runBot(1990, bot);
-    ASSERT_FALSE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
     runBot(20, bot);
-    ASSERT_TRUE(isAllDone);
+    ASSERT_TRUE(m_isAllDone);
 };
 
 
 
 TEST_F(SequenceExecutionTest, testCallBothSubs) {
-    MethodCallback<SequenceExecutionTest> doneCallback(this, &SequenceExecutionTest::allDone);
 
-    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
-    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_2);
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_2);
 
-    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
-    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_WAIT_5sec);
-    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 2, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 2, NodeAction::NODE_ACTION_WAIT_5sec);
 
-    nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
-    nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_1);
+    m_nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    m_nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_1);
 
-    ASSERT_FALSE(isAllDone);
-    Bot bot(nodeReader, &doneCallback);
-    ASSERT_FALSE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
+    Bot bot(m_nodeReader);
+    bot.startExecution(&m_doneCallback);
+    ASSERT_FALSE(m_isAllDone);
     runBot(16990, bot);
-    ASSERT_FALSE(isAllDone);
+    ASSERT_FALSE(m_isAllDone);
     runBot(20, bot);
-    ASSERT_TRUE(isAllDone);
+    ASSERT_TRUE(m_isAllDone);
 };
 
+
+
+TEST_F(SequenceExecutionTest, testCancelExecution) {
+
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    m_nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_1);
+
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 2, NodeAction::NODE_ACTION_WAIT_5sec);
+    m_nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 3, NodeAction::NODE_ACTION_CALL_SUB_2);
+
+    m_nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+
+    ASSERT_FALSE(m_isAllDone);
+    Bot bot(m_nodeReader);
+    bot.startExecution(&m_doneCallback);
+    ASSERT_FALSE(m_isAllDone);
+    runBot(10000, bot);
+    ASSERT_FALSE(m_isAllDone);
+    bot.cancelExecution();
+    runBot(10000, bot);
+    ASSERT_FALSE(m_isAllDone);
+};

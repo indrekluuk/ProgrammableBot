@@ -4,10 +4,10 @@
 
 #include "NodeActionChangeOutputPin.h"
 
-void NodeActionOutputPinOn::execute() {
+void NodeActionOutputPinOn::execute(Callback &callback) {
 
 }
 
-void NodeActionOutputPinOff::execute() {
+void NodeActionOutputPinOff::execute(Callback &callback) {
 
 }

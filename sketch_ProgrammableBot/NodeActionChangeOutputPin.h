@@ -16,16 +16,16 @@ class NodeActionChangeOutputPin : public NodeAction {
 class NodeActionOutputPinOn : public NodeActionChangeOutputPin {
 
 public:
-    void execute();
 
+    virtual void execute(Callback &callback);
 };
 
 
 class NodeActionOutputPinOff : public NodeActionChangeOutputPin {
 
 public:
-    void execute();
 
+    virtual void execute(Callback &callback);
 };
 
 

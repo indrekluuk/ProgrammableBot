@@ -4,6 +4,7 @@
 
 #include "NodeActionWait.h"
 
-void NodeActionWait::execute() {
+
+void NodeActionWait::execute(Callback &callback) {
 
 }

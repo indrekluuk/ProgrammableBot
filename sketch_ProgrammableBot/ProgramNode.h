@@ -6,6 +6,7 @@
 #define PROGRAMMABLEBOT_PROGRAMNODE_H
 
 #include "global.h"
+#include "NodeAction.h"
 
 
 class ProgramNode {
@@ -18,6 +19,8 @@ public:
     ProgramNode();
 
     void initNode(uint8_t id);
+
+    NodeAction::NodeActionType getActionType();
 
 };
 

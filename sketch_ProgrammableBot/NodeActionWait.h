@@ -11,8 +11,8 @@
 class NodeActionWait : public NodeAction {
 
 public:
-    void execute();
 
+    virtual void execute(Callback &callback);
 };
 
 

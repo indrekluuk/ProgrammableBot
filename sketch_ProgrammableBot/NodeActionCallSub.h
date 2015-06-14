@@ -12,7 +12,8 @@ class NodeActionCallSub : public NodeAction {
 
 
 public:
-    void execute();
+
+    void execute(Callback &callback);
 
 };
 

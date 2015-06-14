@@ -6,24 +6,25 @@
 #define PROGRAMMABLEBOT_NODEACTION_H
 
 #include "global.h"
+#include "Callback.h"
 
 class NodeAction {
 
 public:
 
-    static const uint8_t NODE_ACTION_COUNT = 4;
-
     enum NodeActionType {
-        NODE_ACTION_CALL_SUB = 0,
-        NODE_ACTION_WAIT = 1,
-        NODE_ACTION_OUTPUT_PIN_ON = 2,
-        NODE_ACTION_OUTPUT_PIN_OFF = 3
+        NODE_ACTION_IDLE = 0,
+        NODE_ACTION_CALL_SUB,
+        NODE_ACTION_WAIT,
+        NODE_ACTION_OUTPUT_PIN_ON,
+        NODE_ACTION_OUTPUT_PIN_OFF,
+        ACTION_COUNT
     };
 
 private:
 
 public:
-    virtual void execute() = 0;
+    virtual void execute(Callback& callback) = 0;
 
 };
 

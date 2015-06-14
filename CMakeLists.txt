@@ -41,5 +41,7 @@ add_executable(ProgrammableBot
         sketch_ProgrammableBot/NodeActionChangeOutputPin.cpp
         sketch_ProgrammableBot/NodeActionChangeOutputPin.h
         sketch_ProgrammableBot/NodeActionWait.cpp
-        sketch_ProgrammableBot/NodeActionWait.h)
+        sketch_ProgrammableBot/NodeActionWait.h
+        sketch_ProgrammableBot/NodeActionIdle.cpp
+        sketch_ProgrammableBot/NodeActionIdle.h)
 

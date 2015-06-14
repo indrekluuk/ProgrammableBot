@@ -6,8 +6,8 @@
 
 NodeExecutor::NodeExecutor()
 {
-    for (uint8_t i=0; i<NodeAction::NODE_ACTION_COUNT; i++) {
-        m_nodeActions[i] = nullptr;
+    for (uint8_t i=0; i<NodeAction::ACTION_COUNT; i++) {
+        m_nodeActions[i] = &m_actionIdle;
     }
 }
 
@@ -18,6 +18,7 @@ void NodeExecutor::initAction(NodeAction::NodeActionType type, NodeAction *actio
 
 
 void NodeExecutor::executeNode(ProgramNode &node, Callback& done) {
-
+    NodeAction * action = m_nodeActions[node.getActionType()];
+    action->execute(done);
 }
 

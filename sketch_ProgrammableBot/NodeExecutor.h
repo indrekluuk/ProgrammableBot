@@ -10,13 +10,15 @@
 #include "Callback.h"
 #include "ProgramNode.h"
 #include "NodeAction.h"
+#include "NodeActionIdle.h"
 
 
 class NodeExecutor {
 
 private:
 
-    NodeAction * m_nodeActions[NodeAction::NODE_ACTION_COUNT];
+    NodeActionIdle m_actionIdle;
+    NodeAction * m_nodeActions[NodeAction::ACTION_COUNT];
 
 public:
 

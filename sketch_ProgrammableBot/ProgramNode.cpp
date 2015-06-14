@@ -14,3 +14,7 @@ ProgramNode::ProgramNode() :
 void ProgramNode::initNode(uint8_t id) {
     m_id = id;
 }
+
+NodeAction::NodeActionType ProgramNode::getActionType() {
+    return NodeAction::NODE_ACTION_IDLE;
+}

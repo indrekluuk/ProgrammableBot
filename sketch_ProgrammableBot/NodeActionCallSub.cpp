@@ -4,6 +4,7 @@
 
 #include "NodeActionCallSub.h"
 
-void NodeActionCallSub::execute() {
+
+void NodeActionCallSub::execute(Callback &callback) {
 
 }

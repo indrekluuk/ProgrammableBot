@@ -76,4 +76,48 @@ TEST_F(SequenceExecutionTest, testWaitAction) {
 
 
 
+TEST_F(SequenceExecutionTest, testCallOnlySecondSub) {
+    MethodCallback<SequenceExecutionTest> doneCallback(this, &SequenceExecutionTest::allDone);
+
+    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_2);
+
+    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
+    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_WAIT_5sec);
+    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 2, NodeAction::NODE_ACTION_WAIT_5sec);
+
+    nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+
+    ASSERT_FALSE(isAllDone);
+    Bot bot(nodeReader, &doneCallback);
+    ASSERT_FALSE(isAllDone);
+    runBot(1990, bot);
+    ASSERT_FALSE(isAllDone);
+    runBot(20, bot);
+    ASSERT_TRUE(isAllDone);
+};
+
+
+
+TEST_F(SequenceExecutionTest, testCallBothSubs) {
+    MethodCallback<SequenceExecutionTest> doneCallback(this, &SequenceExecutionTest::allDone);
+
+    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    nodeReader.setNodeAction(MAIN_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_2);
+
+    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_5sec);
+    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_WAIT_5sec);
+    nodeReader.setNodeAction(SUB_1_FIRST_NODE_ID + 2, NodeAction::NODE_ACTION_WAIT_5sec);
+
+    nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID, NodeAction::NODE_ACTION_WAIT_1sec);
+    nodeReader.setNodeAction(SUB_2_FIRST_NODE_ID + 1, NodeAction::NODE_ACTION_CALL_SUB_1);
+
+    ASSERT_FALSE(isAllDone);
+    Bot bot(nodeReader, &doneCallback);
+    ASSERT_FALSE(isAllDone);
+    runBot(16990, bot);
+    ASSERT_FALSE(isAllDone);
+    runBot(20, bot);
+    ASSERT_TRUE(isAllDone);
+};
 

@@ -6,12 +6,17 @@
 #define PROGRAMMABLEBOT_NODEACTIONCALLSUB_H
 
 #include "NodeAction.h"
-
+#include "ProgramSequence.h"
 
 class NodeActionCallSub : public NodeAction {
 
+private:
+
+    ProgramSequence & m_programSequence;
 
 public:
+
+    NodeActionCallSub(ProgramSequence & programSequence);
 
     void execute(Callback &callback);
 

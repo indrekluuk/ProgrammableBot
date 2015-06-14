@@ -34,7 +34,6 @@ private:
 public:
     Bot();
 
-
     void run();
 
 private:

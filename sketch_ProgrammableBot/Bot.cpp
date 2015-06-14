@@ -10,12 +10,14 @@ Bot::Bot(NodeReader & nodeReader, Callback * allDone) :
         m_main(*this, MAIN_FIRST_NODE_ID, MAIN_NODE_COUNT),
         m_sub1(*this, SUB_1_FIRST_NODE_ID, SUB_1_NODE_COUNT),
         m_sub2(*this, SUB_2_FIRST_NODE_ID, SUB_2_NODE_COUNT),
-        m_nodeExecutor(m_actionIdle)
+        m_nodeExecutor(m_actionIdle),
+        m_actionWait5Seconds(5000),
+        m_actionWait1Second(1000)
 {
 
     m_nodeExecutor.initAction(NodeAction::NODE_ACTION_CALL_SUB, m_actionCallSub);
-    m_nodeExecutor.initAction(NodeAction::NODE_ACTION_WAIT_1sec, m_actionWait);
-    m_nodeExecutor.initAction(NodeAction::NODE_ACTION_WAIT_5sec, m_actionWait);
+    m_nodeExecutor.initAction(NodeAction::NODE_ACTION_WAIT_1sec, m_actionWait1Second);
+    m_nodeExecutor.initAction(NodeAction::NODE_ACTION_WAIT_5sec, m_actionWait5Seconds);
     m_nodeExecutor.initAction(NodeAction::NODE_ACTION_OUTPUT_PIN_ON, m_actionOutputPinOn);
     m_nodeExecutor.initAction(NodeAction::NODE_ACTION_OUTPUT_PIN_OFF, m_actionOutputPinOff);
 
@@ -30,7 +32,7 @@ void Bot::executeNode(uint8_t nodeId, Callback & done) {
 }
 
 NodeAction::NodeActionType Bot::getNodeActionType(uint8_t nodeId) {
-    return NodeAction::NODE_ACTION_IDLE;
+    return m_nodeReader.readNodeAction(nodeId);
 }
 
 

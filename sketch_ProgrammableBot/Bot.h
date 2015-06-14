@@ -26,7 +26,8 @@ private:
 
     NodeActionIdle m_actionIdle;
     NodeActionCallSub m_actionCallSub;
-    NodeActionWait m_actionWait;
+    NodeActionWait m_actionWait5Seconds;
+    NodeActionWait m_actionWait1Second;
     NodeActionOutputPinOn m_actionOutputPinOn;
     NodeActionOutputPinOff m_actionOutputPinOff;
     NodeExecutor m_nodeExecutor;

@@ -21,6 +21,15 @@ protected:
     }
 
 
+
+   void runBot(uint32_t time_ms, Bot & bot) {
+        for (int i=0; i<time_ms; i++) {
+            arduino_increase_millis(1);
+            bot.run();
+        }
+    }
+
+
 public:
     void allDone() {
         isAllDone = true;
@@ -56,9 +65,11 @@ TEST_F(SequenceExecutionTest, testWaitAction) {
     ASSERT_FALSE(isAllDone);
     Bot bot(nodeReader, &doneCallback);
     ASSERT_FALSE(isAllDone);
-    arduino_increase_millis(5010);
+    runBot(5010, bot);
     ASSERT_FALSE(isAllDone);
-    arduino_increase_millis(1000);
+    runBot(900, bot);
+    ASSERT_FALSE(isAllDone);
+    runBot(100, bot);
     ASSERT_TRUE(isAllDone);
 
 };

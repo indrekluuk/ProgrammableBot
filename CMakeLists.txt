@@ -24,5 +24,9 @@ set(TEST_SOURCE_FILES
 add_executable(ProgrammableBot
         ${FRAMEWORK_SOURCE_FILES}
         ${LIBRARY_SOURCE_FILES}
-        ${TEST_SOURCE_FILES})
+        ${TEST_SOURCE_FILES}
+        sketch_ProgrammableBot/ProgramNode.cpp
+        sketch_ProgrammableBot/ProgramNode.h
+        sketch_ProgrammableBot/ProgramSequence.cpp
+        sketch_ProgrammableBot/ProgramSequence.h)
 

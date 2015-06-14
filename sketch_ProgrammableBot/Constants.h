@@ -1,0 +1,11 @@
+
+
+#define MAIN_FIRST_NODE_ID 0
+#define MAIN_NODE_COUNT 15
+
+#define SUB_1_FIRST_NODE_ID 15
+#define SUB_1_NODE_COUNT 10
+
+#define SUB_2_FIRST_NODE_ID 25
+#define SUB_2_NODE_COUNT 10
+

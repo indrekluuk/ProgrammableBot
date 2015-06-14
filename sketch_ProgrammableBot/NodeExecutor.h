@@ -8,7 +8,6 @@
 #define PROGRAMMABLEBOT_NODEEXECUTOR_H
 
 #include "Callback.h"
-#include "ProgramNode.h"
 #include "NodeActionIdle.h"
 
 
@@ -22,7 +21,7 @@ private:
 public:
     NodeExecutor(NodeActionIdle & nodeActionIdle);
     void initAction(NodeAction::NodeActionType type, NodeAction & action);
-    void executeNode(ProgramNode & node, Callback& done);
+    void executeNode(NodeAction::NodeActionType type, Callback& done);
 };
 
 

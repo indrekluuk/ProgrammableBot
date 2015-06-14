@@ -15,9 +15,6 @@
 class Bot {
 
 private:
-    ProgramNode m_mainNodes[MAIN_NODE_COUNT];
-    ProgramNode m_sub1Nodes[SUB_1_NODE_COUNT];
-    ProgramNode m_sub2Nodes[SUB_2_NODE_COUNT];
 
     ProgramSequence m_main;
     ProgramSequence m_sub1;
@@ -36,7 +33,8 @@ public:
 
     Bot(Callback * allDone);
 
-    void executeNode(ProgramNode & node, Callback & done);
+    NodeAction::NodeActionType getNodeAction(uint8_t nodeId);
+    void executeNode(NodeAction::NodeActionType type, Callback & done);
 
     void run();
 

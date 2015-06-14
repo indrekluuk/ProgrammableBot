@@ -15,8 +15,8 @@ void NodeExecutor::initAction(NodeAction::NodeActionType type, NodeAction &actio
     m_nodeActions[type] = &action;
 }
 
-void NodeExecutor::executeNode(ProgramNode & node, Callback& done) {
-    NodeAction * action = m_nodeActions[node.getActionType()];
+void NodeExecutor::executeNode(NodeAction::NodeActionType type, Callback& done) {
+    NodeAction * action = m_nodeActions[type];
     action->execute(done);
 }
 

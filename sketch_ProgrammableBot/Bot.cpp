@@ -6,9 +6,9 @@
 
 
 Bot::Bot(Callback * allDone) :
-        m_main(*this, m_mainNodes, MAIN_NODE_COUNT, MAIN_FIRST_NODE_ID),
-        m_sub1(*this, m_sub1Nodes, SUB_1_NODE_COUNT, SUB_1_FIRST_NODE_ID),
-        m_sub2(*this, m_sub2Nodes, SUB_2_NODE_COUNT, SUB_2_FIRST_NODE_ID),
+        m_main(*this, MAIN_FIRST_NODE_ID, MAIN_NODE_COUNT),
+        m_sub1(*this, SUB_1_FIRST_NODE_ID, SUB_1_NODE_COUNT),
+        m_sub2(*this, SUB_2_FIRST_NODE_ID, SUB_2_NODE_COUNT),
         m_nodeExecutor(m_actionIdle)
 {
 
@@ -22,8 +22,12 @@ Bot::Bot(Callback * allDone) :
 
 
 
-void Bot::executeNode(ProgramNode & node, Callback & done) {
-    m_nodeExecutor.executeNode(node, done);
+NodeAction::NodeActionType Bot::getNodeAction(uint8_t nodeId) {
+    return NodeAction::NODE_ACTION_IDLE;
+}
+
+void Bot::executeNode(NodeAction::NodeActionType type, Callback & done) {
+    m_nodeExecutor.executeNode(type, done);
 }
 
 

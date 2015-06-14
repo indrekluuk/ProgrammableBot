@@ -5,7 +5,6 @@
 #ifndef PROGRAMMABLEBOT_PROGRAMSEQUENCE_H
 #define PROGRAMMABLEBOT_PROGRAMSEQUENCE_H
 
-#include "ProgramNode.h"
 #include "NodeExecutor.h"
 #include "Sequencer.h"
 
@@ -16,25 +15,22 @@ class ProgramSequence {
 
 private:
     Bot & m_bot;
-    ProgramNode * m_programNodes;
+    uint8_t m_firstNodeId;
     uint8_t m_nodeCount;
     uint8_t m_currentNodeIndex;
 
     MethodSequencer<ProgramSequence> m_executionSequencer;
 
 public:
-    ProgramSequence(
-            Bot & bot,
-            ProgramNode * nodes,
-            uint8_t nodeCount,
-            uint8_t firstNodeId);
+    ProgramSequence(Bot & bot, uint8_t firstNodeId, uint8_t nodeCount);
 
     void start(Callback* done);
 
 private:
-    void initNodes(uint8_t firstNodeId);
 
     void executeNode(Sequencer& sequencer, uint8_t step);
+    NodeAction::NodeActionType getNodeActionType(uint8_t nodeIndex);
+    uint8_t getNodeId(uint8_t nodeIndex);
 
 };
 

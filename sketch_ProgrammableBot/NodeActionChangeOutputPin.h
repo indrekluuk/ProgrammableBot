@@ -13,4 +13,21 @@ class NodeActionChangeOutputPin : public NodeAction {
 };
 
 
+class NodeActionOutputPinOn : public NodeActionChangeOutputPin {
+
+public:
+    void execute();
+
+};
+
+
+class NodeActionOutputPinOff : public NodeActionChangeOutputPin {
+
+public:
+    void execute();
+
+};
+
+
+
 #endif //PROGRAMMABLEBOT_NODEACTIONCHANGEOUTPUTPIN_H

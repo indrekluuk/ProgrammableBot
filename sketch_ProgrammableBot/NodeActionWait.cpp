@@ -3,3 +3,7 @@
 //
 
 #include "NodeActionWait.h"
+
+void NodeActionWait::execute() {
+
+}

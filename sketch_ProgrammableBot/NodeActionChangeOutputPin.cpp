@@ -3,3 +3,11 @@
 //
 
 #include "NodeActionChangeOutputPin.h"
+
+void NodeActionOutputPinOn::execute() {
+
+}
+
+void NodeActionOutputPinOff::execute() {
+
+}

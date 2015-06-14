@@ -8,6 +8,10 @@
 
 class NodeAction {
 
+
+public:
+    virtual void execute() = 0;
+
 };
 
 

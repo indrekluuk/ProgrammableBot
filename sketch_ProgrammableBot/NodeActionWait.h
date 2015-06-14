@@ -10,6 +10,9 @@
 
 class NodeActionWait : public NodeAction {
 
+public:
+    void execute();
+
 };
 
 

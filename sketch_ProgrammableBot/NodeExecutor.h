@@ -9,24 +9,26 @@
 
 #include "Callback.h"
 #include "ProgramNode.h"
-#include "NodeAction.h"
 #include "NodeActionIdle.h"
-
+#include "NodeActionCallSub.h"
+#include "NodeActionWait.h"
+#include "NodeActionChangeOutputPin.h"
 
 class NodeExecutor {
 
 private:
 
     NodeActionIdle m_actionIdle;
+    NodeActionCallSub m_actionCallSub;
+    NodeActionWait m_actionWait;
+    NodeActionOutputPinOn m_actionOutputPinOn;
+    NodeActionOutputPinOff m_actionOutputPinOff;
+
     NodeAction * m_nodeActions[NodeAction::ACTION_COUNT];
 
 public:
-
     NodeExecutor();
-    void initAction(NodeAction::NodeActionType type, NodeAction* action);
-
-    void executeNode(ProgramNode& node, Callback& done);
-
+    void executeNode(ProgramNode & node, Callback& done);
 };
 
 

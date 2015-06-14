@@ -10,10 +10,12 @@
 #include "Sequencer.h"
 
 
+class Bot;
+
 class ProgramSequence {
 
 private:
-    NodeExecutor& m_nodeExecutor;
+    Bot & m_bot;
     ProgramNode * m_programNodes;
     uint8_t m_nodeCount;
     uint8_t m_currentNodeIndex;
@@ -21,7 +23,11 @@ private:
     MethodSequencer<ProgramSequence> m_executionSequencer;
 
 public:
-    ProgramSequence(NodeExecutor& nodeExecutor, ProgramNode * nodes, uint8_t nodeCount, uint8_t firstNodeId);
+    ProgramSequence(
+            Bot & bot,
+            ProgramNode * nodes,
+            uint8_t nodeCount,
+            uint8_t firstNodeId);
 
     void start(Callback* done);
 

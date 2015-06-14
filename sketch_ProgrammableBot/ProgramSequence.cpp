@@ -3,16 +3,16 @@
 //
 
 #include "ProgramSequence.h"
-
+#include "Bot.h"
 
 
 ProgramSequence::ProgramSequence(
-        NodeExecutor& nodeExecutor,
+        Bot & bot,
         ProgramNode * nodes,
         uint8_t nodeCount,
         uint8_t firstNodeId
 ) :
-        m_nodeExecutor(nodeExecutor),
+        m_bot(bot),
         m_programNodes(nodes),
         m_nodeCount(nodeCount),
         m_currentNodeIndex(0),
@@ -35,6 +35,6 @@ void ProgramSequence::start(Callback *done) {
 void ProgramSequence::executeNode(Sequencer &sequencer, uint8_t step) {
     uint8_t nodeIndex = step - (uint8_t)1;
     if (nodeIndex < m_nodeCount) {
-        m_nodeExecutor.executeNode(m_programNodes[nodeIndex], sequencer.nextWhenDone());
+        m_bot.executeNode(m_programNodes[nodeIndex], sequencer.nextWhenDone());
     }
 }

@@ -30,19 +30,18 @@
 
 #define OUTPUT 1
 #define HIGH 1
-#define LOW 2
+#define LOW 0
 
 
 
-void pinMode(int ledPin, int mode);
+void arduino_reset_device();
+void arduino_increase_millis(unsigned long time_ms);
+int arduino_get_digitalWrite_HIGH_count(int pin);
+int arduino_get_digitalWrite_LOW_count(int pin);
 
-
-void digitalWrite(int ledPin, int val);
-
-
+void pinMode(int pin, int mode);
+void digitalWrite(int pin, int val);
 unsigned long millis();
 
-
-void arduino_increase_millis(unsigned long time_ms);
 
 #endif //TRAFFIC_ARDUINO_H

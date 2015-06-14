@@ -25,24 +25,58 @@
  */
 
 #include "Arduino.h"
+#include "Assert.h"
 
 
-int milliseconds = 0;
+static const int ARDUINO_PIN_COUNT = 14;
+int arduino_digitalWriteCounter_HIGH[ARDUINO_PIN_COUNT];
+int arduino_digitalWriteCounter_LOW[ARDUINO_PIN_COUNT];
+
+int arduino_milliseconds = 0;
 
 
-void pinMode(int ledPin, int mode) {
+
+
+void arduino_reset_device() {
+    arduino_milliseconds = 0;
+    for (int i=0; i<ARDUINO_PIN_COUNT; i++) {
+        arduino_digitalWriteCounter_HIGH[i] = 0;
+        arduino_digitalWriteCounter_LOW[i] = 0;
+    }
 }
-
-
-void digitalWrite(int ledPin, int val) {
-}
-
-
-unsigned long millis() {
-    return milliseconds;
-}
-
 
 void arduino_increase_millis(unsigned long time_ms) {
-    milliseconds += time_ms;
+    arduino_milliseconds += time_ms;
 }
+
+int arduino_get_digitalWrite_HIGH_count(int pin) {
+    assert(pin < ARDUINO_PIN_COUNT);
+    return arduino_digitalWriteCounter_HIGH[pin];
+}
+
+int arduino_get_digitalWrite_LOW_count(int pin) {
+    assert(pin < ARDUINO_PIN_COUNT);
+    return arduino_digitalWriteCounter_LOW[pin];
+}
+
+
+
+
+
+void pinMode(int pin, int mode) {
+}
+
+void digitalWrite(int pin, int val) {
+    assert(pin < ARDUINO_PIN_COUNT);
+    if (val) {
+        arduino_digitalWriteCounter_HIGH[pin]++;
+    } else {
+        arduino_digitalWriteCounter_LOW[pin]++;
+    }
+}
+
+unsigned long millis() {
+    return arduino_milliseconds;
+}
+
+

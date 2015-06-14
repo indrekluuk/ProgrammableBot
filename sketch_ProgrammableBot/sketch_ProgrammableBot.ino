@@ -3,9 +3,10 @@
 #include "Bot.h"
 
 HardwareNodeReader nodeReader;
-Bot bot(nodeReader, nullptr);
+Bot bot(nodeReader);
 
 void setup() {
+  bot.start(nullptr);
 }
 
 
